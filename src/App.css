@@ -1,4 +1,325 @@
+/* General styles */
+body {
+  font-family: 'Gemunu Libre', sans-serif;
+  background-color: #000000;
+  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo4.jpg'); /* Ruta de la imagen */
+  background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
+  background-position: center; /* Centrar la imagen */
+  /*background-repeat: no-repeat; /* No repetir la imagen */
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1, h2, h3 {
+  font-size: 50px;
+  font-family: 'Gemunu Libre', sans-serif;
+  text-align: center;
+  color: #fff;
+}
+
+p {
+  font-size: 30px;
+  color: #0dff00;
+}
+
+.container {
+  font-family: 'Gemunu Libre', sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+button {
+  font-family: 'Gemunu Libre', sans-serif;
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #282c34;
+  background-color: #0dff00;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #282c34;
+  color: #ddd;
+}
+
+.section {
+  padding: 20px;
+  color: #282c34; /* Ajusta según sea necesario */
+}
+
+/* Estilos específicos para cada sección */
+.group-section {
+  background-image: url('./assets/img/Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.knockout-section {
+  background-image: url('./assets/img/Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.semifinal-section {
+  background-image: url('./assets/img/Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+.winner-section {
+  background-image: url('./assets/img/Fondo1.jpg');
+  background-size: cover;
+  background-position: center;
+}
+
+/* Estilos generales para inputs */
+input[type="text"],
+input[type="number"],
+input[type="submit"],
+textarea,
+select {
+  font-family: 'Gemunu Libre', sans-serif; /* Asegúrate de que la fuente se aplique */
+  border: 1px solid #ddd; /* Borde de color gris claro */
+  border-radius: 5px; /* Bordes redondeados */
+  padding: 10px; /* Espacio interno */
+  margin-bottom: 15px; /* Espacio inferior */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave para interacciones */
+}
+
+/* Estilo para inputs al hacer foco */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="submit"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #0056b3; /* Color del borde cuando el input está enfocado */
+  box-shadow: 0 0 5px rgba(0, 86, 179, 0.5); /* Sombra suave alrededor del input */
+  outline: none; /* Eliminar el borde de enfoque predeterminado del navegador */
+}
+
+/* Estilo para botones de submit */
+input[type="submit"] {
+  background-color: #007bff; /* Color de fondo del botón */
+  color: #fff; /* Color del texto del botón */
+  cursor: pointer; /* Cambia el cursor a una mano cuando se pasa por encima */
+  border: none; /* Eliminar el borde del botón */
+  font-size: 16px; /* Tamaño del texto del botón */
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3; /* Color de fondo del botón al pasar el mouse por encima */
+}
+
+/* Estilos para textarea */
+textarea {
+  resize: vertical; /* Permitir el cambio de tamaño verticalmente */
+  min-height: 100px; /* Altura mínima para el área de texto */
+}
+
+/* Estilos para select */
+select {
+  background-color: #fff; /* Color de fondo del desplegable */
+}
+
+/* Form styles */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+form input, form select {
+  padding: 10px;
+  margin: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 80%;
+  max-width: 400px;
+}
+
+form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+table, th, td {
+  border: 2px solid #ddd;
+}
+
+th, td {
+  padding: 10px 5px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+th {
+  background-color: #0dff00;
+  color: #fff;
+}
+
+tr:nth-child(even) {
+  background-color: #e9e8e8;
+}
+
+tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+/* Match result form styles */
+.match-result-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.match-result-form input {
+  margin: 5px;
+  padding: 10px;
+  width: 50px;
+  text-align: center;
+}
+
+/* Specific component styles */
+.group-table-container {
+  margin-bottom: 40px;
+}
+
+.group-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.classified-teams {
+  margin: 20px auto;
+  max-width: 800px;
+  color: #ddd;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 10px; /* Bordes redondeados */
+}
+
+.classified-teams h3 {
+  font-size: 40px;
+  margin-bottom: 10px;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo semi-transparente */
+  padding: 10px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.classified-teams ol {
+  text-align: center;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente */
+  padding: 10px;
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+.knockout-stage, .semifinal {
+  font-family: 'Gemunu Libre', sans-serif;
+  margin: 20px auto;
+  max-width: 800px;
+  padding: 100px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo2.jpg'); /* Ruta de la imagen */
+  background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: no-repeat; /* No repetir la imagen */
+}
+
+.winner {
+  font-family: 'Gemunu Libre', sans-serif;
+  color:#0dff00;
+  text-align: center;
+  margin: 20px auto;
+  padding: 100px;
+  max-width: 800px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo1.jpg'); /* Ruta de la imagen */
+  background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
+  background-position: center; /* Centrar la imagen */
+  background-repeat: no-repeat; /* No repetir la imagen */
+}
+
+.winner h1 {
+  font-family: 'Gemunu Libre', sans-serif;
+  color:#ddd;
+  text-align: center;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.winner p {
+  font-family: 'Gemunu Libre', sans-serif;
+  font-size: 50px;
+  color: #0dff00;
+  font-weight: bold;
+  animation: slideIn 2s ease-in-out;
+  /* Other styles to make it stand out */
+  text-align: center;
+  margin: 20px auto;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
+  padding: 20px;
+  border-radius: 10px;
+}
+
+
+.match-result {
+  font-family: 'Gemunu Libre', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.match-result span {
+  margin: 0 10px;
+  font-size: 18px;
+}
+
 .App {
+  font-family: 'Gemunu Libre', sans-serif;
   text-align: center;
 }
 
@@ -25,7 +346,7 @@
 }
 
 .App-link {
-  color: #61dafb;
+  color: #0dff00;
 }
 
 @keyframes App-logo-spin {
@@ -34,5 +355,76 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .container {
+    padding: 10px;
+  }
+
+  .group-table-container, .classified-teams, .knockout-stage, .semifinal, .winner {
+    padding: 10px;
+    max-width: 100%;
+  }
+
+  form input, form select, form textarea {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media (max-width: 992px) {
+  h1, h2, h3 {
+    font-size: 40px;
+  }
+
+  p {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 5px;
+  }
+
+  .group-table-container, .classified-teams, .knockout-stage, .semifinal, .winner {
+    padding: 5px;
+    max-width: 100%;
+  }
+
+  form input, form select, form textarea {
+    width: 100%;
+    max-width: none;
+  }
+
+  h1, h2, h3 {
+    font-size: 30px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1, h2, h3 {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  form input, form select, form textarea {
+    font-size: 14px;
+    padding: 8px;
   }
 }
