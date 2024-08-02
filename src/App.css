@@ -2,7 +2,7 @@
 body {
   font-family: 'Gemunu Libre', sans-serif;
   background-color: #000000;
-  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo4.jpg'); /* Ruta de la imagen */
+  background-image: url('./assets/img/Fondo4.jpg'); /* Ruta de la imagen */
   background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
   background-position: center; /* Centrar la imagen */
   /*background-repeat: no-repeat; /* No repetir la imagen */
@@ -243,7 +243,7 @@ tr:hover {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
-  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo2.jpg'); /* Ruta de la imagen */
+  background-image: url('./assets/img/Fondo2.jpg'); /* Ruta de la imagen */
   background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
   background-position: center; /* Centrar la imagen */
   background-repeat: no-repeat; /* No repetir la imagen */
@@ -259,7 +259,7 @@ tr:hover {
   border: 1px solid #ddd;
   border-radius: 5px;
   background-color: #fff;
-  background-image: url('C:/Users/jonat/OneDrive/Documentos/GitHub/torneo-futbol/torneo-futbol/src/assets/img/Fondo1.jpg'); /* Ruta de la imagen */
+  background-image: url('./assets/img/Fondo1.jpg'); /* Ruta de la imagen */
   background-size: cover; /* Ajustar la imagen para cubrir el contenedor */
   background-position: center; /* Centrar la imagen */
   background-repeat: no-repeat; /* No repetir la imagen */
