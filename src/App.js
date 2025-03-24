@@ -1,4 +1,4 @@
-import logo from './assets/img/LogoTorneoFC24.png';
+import logo from './assets/img/LogoTorneoFC.png';
 import './App.css';
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';

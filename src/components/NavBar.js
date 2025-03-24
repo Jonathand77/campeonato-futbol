@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
-import logo from '../assets/img/LogoTorneoFC24.png';
+import logo from '../assets/img/LogoTorneoFC.png';
 
 const NavBar = () => {
   return (
