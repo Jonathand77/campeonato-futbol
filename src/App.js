@@ -230,7 +230,7 @@ function App() {
     <Router>
       <NavBar />
       <div className="container">
-        <h1>Torneo de Fútbol FC 24</h1>
+        <h1>Torneo de Fútbol FC 25</h1>
         <Routes>
           <Route path="/" element={
             <>
