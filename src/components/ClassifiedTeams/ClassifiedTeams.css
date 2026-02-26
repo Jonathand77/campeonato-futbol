@@ -1,0 +1,29 @@
+.classified-teams {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.classified-teams__group {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.classified-teams__group h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--warning);
+  font-size: 1rem;
+}
+
+.classified-teams__group ol {
+  margin: 0.55rem 0 0;
+  padding-left: 1.25rem;
+  color: #fff;
+}
+
+.classified-teams__group li {
+  margin: 0.3rem 0;
+}

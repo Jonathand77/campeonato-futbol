@@ -1,0 +1,41 @@
+.match-card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.5rem;
+  align-items: end;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.match-card__title {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.empty-state {
+  border-radius: 12px;
+  border: 1px dashed var(--border);
+  padding: 1rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.empty-state h3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--warning);
+  font-size: 1rem;
+}
+
+.empty-state p {
+  margin-top: 0.35rem;
+  color: var(--text-muted);
+}

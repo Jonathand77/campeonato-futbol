@@ -1,0 +1,7 @@
+.team-row td {
+  transition: color 0.2s ease;
+}
+
+.team-row:hover td {
+  color: #ffffff;
+}

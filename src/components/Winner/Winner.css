@@ -1,0 +1,37 @@
+.winner-card {
+  background: linear-gradient(140deg, rgba(13, 28, 45, 0.9), rgba(27, 16, 5, 0.9));
+}
+
+.winner {
+  text-align: center;
+  padding: 1rem;
+}
+
+.winner h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--warning);
+  font-size: clamp(1.4rem, 2.1vw, 1.9rem);
+}
+
+.winner p {
+  margin-top: 0.6rem;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: var(--accent);
+  animation: pulseTitle 1.6s ease-in-out infinite;
+}
+
+@keyframes pulseTitle {
+  0%,
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(29, 255, 133, 0.15);
+  }
+  50% {
+    transform: scale(1.03);
+    text-shadow: 0 0 16px rgba(29, 255, 133, 0.4);
+  }
+}

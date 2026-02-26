@@ -1,0 +1,43 @@
+.group-table-container {
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.group-name {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.75rem 0.9rem;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid var(--border);
+  font-size: 1rem;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.62rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(176, 191, 211, 0.15);
+}
+
+.data-table thead th {
+  color: var(--accent);
+  background: rgba(255, 255, 255, 0.04);
+  font-weight: 700;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.data-table tbody tr:hover {
+  background: rgba(29, 255, 133, 0.1);
+}

@@ -1,256 +1,270 @@
 import logo from './assets/img/LogoTorneoFC.png';
 import './App.css';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import GroupTable from './components/GroupTable';
-import MatchForm from './components/MatchForm';
-import GroupForm from './components/GroupForm';
-import TeamForm from './components/TeamForm';
-import ClassifiedTeams from './components/ClassifiedTeams';
-import KnockoutStage from './components/KnockoutStage';
-import Semifinal from './components/SemiFinal';
-import Winner from './components/Winner';
-import NavBar from './components/NavBar';
+import { FaTrophy, FaLayerGroup, FaProjectDiagram, FaExclamationTriangle } from 'react-icons/fa';
+import {
+  GroupTable,
+  MatchForm,
+  GroupForm,
+  TeamForm,
+  ClassifiedTeams,
+  KnockoutStage,
+  Semifinal,
+  Winner,
+  NavBar,
+  SectionCard,
+} from './components';
+import {
+  STORAGE_KEY,
+  createTeam,
+  updateTeamsFromMatch,
+  getClassifiedTeams,
+  buildKnockoutMatches,
+  buildSemifinalMatches,
+  getWinnerFromSemifinals,
+} from './utils/tournament';
+
+const getInitialTournamentState = () => {
+  try {
+    const savedState = localStorage.getItem(STORAGE_KEY) || sessionStorage.getItem(STORAGE_KEY);
+    if (!savedState) {
+      return {
+        groups: [],
+        matches: [],
+        knockoutMatches: [],
+        semifinalMatches: [],
+        winner: null,
+      };
+    }
+
+    const parsedState = JSON.parse(savedState);
+    return {
+      groups: parsedState?.groups || [],
+      matches: parsedState?.matches || [],
+      knockoutMatches: parsedState?.knockoutMatches || [],
+      semifinalMatches: parsedState?.semifinalMatches || [],
+      winner: parsedState?.winner || null,
+    };
+  } catch (error) {
+    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(STORAGE_KEY);
+    return {
+      groups: [],
+      matches: [],
+      knockoutMatches: [],
+      semifinalMatches: [],
+      winner: null,
+    };
+  }
+};
 
 function App() {
-  const [groups, setGroups] = useState([]);
-  const [teams, setTeams] = useState([]);
-  const [match, setMatch] = useState([]);
-  const [knockoutMatches, setKnockoutMatches] = useState([]);
-  const [semifinalMatches, setSemifinalMatches] = useState([]);
-  const [winner, setWinner] = useState(null);
+  const initialTournamentState = useMemo(() => getInitialTournamentState(), []);
+  const [groups, setGroups] = useState(initialTournamentState.groups);
+  const [matches, setMatches] = useState(initialTournamentState.matches);
+  const [knockoutMatches, setKnockoutMatches] = useState(initialTournamentState.knockoutMatches);
+  const [semifinalMatches, setSemifinalMatches] = useState(initialTournamentState.semifinalMatches);
+  const [winner, setWinner] = useState(initialTournamentState.winner);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
 
-  // Recuperar datos desde sessionStorage
   useEffect(() => {
-    const savedGroups = sessionStorage.getItem('groups');
-    const savedTeams = sessionStorage.getItem('teams');
-    const savedMatch = sessionStorage.getItem('match');
-    const savedKnockoutMatches = sessionStorage.getItem('knockoutMatches');
-    const savedSemifinalMatches = sessionStorage.getItem('semifinalMatches');
-    const savedWinner = sessionStorage.getItem('winner');
-    
-    if (savedGroups) setGroups(JSON.parse(savedGroups));
-    if (savedTeams) setTeams(JSON.parse(savedTeams));
-    if (savedMatch) setMatch(JSON.parse(savedMatch));
-    if (savedKnockoutMatches) setKnockoutMatches(JSON.parse(savedKnockoutMatches));
-    if (savedSemifinalMatches) setSemifinalMatches(JSON.parse(savedSemifinalMatches));
-    if (savedWinner) setWinner(JSON.parse(savedWinner));
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ groups, matches, knockoutMatches, semifinalMatches, winner })
+    );
+  }, [groups, matches, knockoutMatches, semifinalMatches, winner]);
+
+  const resetTournament = useCallback(() => {
+    setGroups([]);
+    setMatches([]);
+    setKnockoutMatches([]);
+    setSemifinalMatches([]);
+    setWinner(null);
+    setIsResetModalOpen(false);
+    localStorage.removeItem(STORAGE_KEY);
+    sessionStorage.removeItem(STORAGE_KEY);
   }, []);
 
-  // Guardar datos en sessionStorage
-  useEffect(() => {
-    sessionStorage.setItem('groups', JSON.stringify(groups));
-    sessionStorage.setItem('teams', JSON.stringify(teams));
-    sessionStorage.setItem('match', JSON.stringify(match));
-    sessionStorage.setItem('knockoutMatches', JSON.stringify(knockoutMatches));
-    sessionStorage.setItem('semifinalMatches', JSON.stringify(semifinalMatches));
-    sessionStorage.setItem('winner', JSON.stringify(winner));
-  }, [groups, teams, match, knockoutMatches, semifinalMatches, winner]);
+  const addGroup = useCallback((groupName) => {
+    const normalizedName = groupName.trim().toUpperCase();
+    if (!normalizedName) {
+      return;
+    }
 
-  const addGroup = (groupName) => {
-    setGroups([...groups, { name: groupName, teams: [] }]);
-  };
+    setGroups((previousGroups) => {
+      const alreadyExists = previousGroups.some((group) => group.name === normalizedName);
+      if (alreadyExists) {
+        return previousGroups;
+      }
+      return [...previousGroups, { name: normalizedName, teams: [] }];
+    });
+  }, []);
 
-  const addTeam = (groupName, teamName) => {
+  const addTeam = useCallback((groupName, teamName) => {
+    const normalizedTeamName = teamName.trim();
+    if (!groupName || !normalizedTeamName) {
+      return;
+    }
+
     setGroups((prevGroups) =>
       prevGroups.map((group) =>
         group.name === groupName
           ? {
               ...group,
-              teams: [
-                ...group.teams,
-                {
-                  id: group.teams.length + 1,
-                  name: teamName,
-                  played: 0,
-                  won: 0,
-                  drawn: 0,
-                  lost: 0,
-                  points: 0,
-                  goalDifference: 0,
-                },
-              ],
+              teams: group.teams.some((team) => team.name.toLowerCase() === normalizedTeamName.toLowerCase())
+                ? group.teams
+                : [...group.teams, createTeam(normalizedTeamName, group.teams.length)],
             }
           : group
       )
     );
-  };
+  }, []);
 
-  const updateTeams = (group, match) => {
-    const updatedTeams = group.teams.map((team) => {
-      if (team.name === match.team1) {
-        team.played += 1;
-        team.goalDifference += match.score1 - match.score2;
-        if (match.score1 > match.score2) {
-          team.won += 1;
-          team.points += 3;
-        } else if (match.score1 === match.score2) {
-          team.drawn += 1;
-          team.points += 1;
-        } else {
-          team.lost += 1;
+  const addMatch = useCallback((match) => {
+    setMatches((previousMatches) => [...previousMatches, match]);
+
+    setGroups((previousGroups) =>
+      previousGroups.map((group) => {
+        const hasBothTeams = group.teams.some((team) => team.name === match.team1)
+          && group.teams.some((team) => team.name === match.team2);
+
+        if (!hasBothTeams) {
+          return group;
         }
-      } else if (team.name === match.team2) {
-        team.played += 1;
-        team.goalDifference += match.score2 - match.score1;
-        if (match.score2 > match.score1) {
-          team.won += 1;
-          team.points += 3;
-        } else if (match.score1 === match.score2) {
-          team.drawn += 1;
-          team.points += 1;
-        } else {
-          team.lost += 1;
-        }
-      }
-      return team;
-    });
 
-    return updatedTeams;
-  };
-
-  const addMatch = (match) => {
-    setGroups((prevGroups) => {
-      return prevGroups.map((group) => {
-        if (group.teams.some((team) => team.name === match.team1 || team.name === match.team2)) {
-          const updatedTeams = updateTeams(group, match);
-          return { ...group, teams: updatedTeams };
-        }
-        return group;
-      });
-    });
-  };
-
-  const groupNames = groups.map((group) => group.name);
-
-  const classifiedTeams = groups.reduce((acc, group) => {
-    const sortedTeams = group.teams.sort((a, b) => {
-      if (b.points === a.points) {
-        return b.goalDifference - a.goalDifference;
-      }
-      return b.points - a.points;
-    });
-    acc[group.name] = sortedTeams.slice(0, 2);
-    return acc;
-  }, {});
-
-  const createKnockoutMatches = () => {
-    const matches = [];
-    const groupKeys = Object.keys(classifiedTeams);
-    for (let i = 0; i < groupKeys.length; i += 2) {
-      if (groupKeys[i + 1]) {
-        matches.push({
-          team1: classifiedTeams[groupKeys[i]][0] || {},
-          team2: classifiedTeams[groupKeys[i + 1]][1] || {},
-        });
-        matches.push({
-          team1: classifiedTeams[groupKeys[i + 1]][0] || {},
-          team2: classifiedTeams[groupKeys[i]][1] || {},
-        });
-      }
-    }
-    setKnockoutMatches(matches);
-  };
-
-  const addKnockoutResult = (matchIndex, result) => {
-    setKnockoutMatches((prevMatches) =>
-      prevMatches.map((match, index) => {
-        if (index === matchIndex) {
-          if (match && match.team1 && match.team2) {
-            return {
-              ...match,
-              result,
-            };
-          } else {
-            console.error("Match or teams are undefined:", match);
-            return match;
-          }
-        } else {
-          return match;
-        }
+        return {
+          ...group,
+          teams: updateTeamsFromMatch(group.teams, match),
+        };
       })
     );
-  
-    // Determinar los ganadores y crear los partidos de semifinales
-    const updatedMatches = [...knockoutMatches];
-    updatedMatches[matchIndex].result = result;
-  
-    const winners = updatedMatches.map((match) => {
-      if (match.result && match.team1 && match.team2) {
-        if (match.result.team1 > match.result.team2) {
-          return match.team1;
-        } else {
-          return match.team2;
-        }
-      } else {
-        console.error("Result or teams are undefined:", match);
-        return null;
-      }
-    }).filter(winner => winner !== null);
+  }, []);
 
-    const semifinals = [];
-    for (let i = 0; i < winners.length; i += 2) {
-      if (winners[i + 1]) {
-        semifinals.push({
-          team1: winners[i],
-          team2: winners[i + 1],
-        });
-      }
-    }
-    setSemifinalMatches(semifinals);
-  };
+  const groupNames = useMemo(() => groups.map((group) => group.name), [groups]);
 
-  const addSemifinalResult = (matchIndex, result) => {
-    setSemifinalMatches((prevMatches) =>
-      prevMatches.map((match, index) =>
-        index === matchIndex
-          ? {
-              ...match,
-              result,
-            }
-          : match
-      )
-    );
+  const classifiedTeams = useMemo(() => getClassifiedTeams(groups), [groups]);
 
-    const updatedMatches = [...semifinalMatches];
-    updatedMatches[matchIndex].result = result;
+  const createKnockoutPhase = useCallback(() => {
+    setKnockoutMatches(buildKnockoutMatches(classifiedTeams));
+    setSemifinalMatches([]);
+    setWinner(null);
+  }, [classifiedTeams]);
 
-    const winners = updatedMatches.map((match) => {
-      if (match.result.team1 > match.result.team2) {
-        return match.team1;
-      } else {
-        return match.team2;
-      }
+  const addKnockoutResult = useCallback((matchIndex, result) => {
+    setKnockoutMatches((previousMatches) => {
+      const updatedMatches = previousMatches.map((match, index) =>
+        index === matchIndex ? { ...match, result } : match
+      );
+
+      setSemifinalMatches(buildSemifinalMatches(updatedMatches));
+      return updatedMatches;
     });
+  }, []);
 
-    setWinner(winners[0]);
-  };
+  const addSemifinalResult = useCallback((matchIndex, result) => {
+    setSemifinalMatches((previousMatches) => {
+      const updatedMatches = previousMatches.map((match, index) =>
+        index === matchIndex ? { ...match, result } : match
+      );
+
+      setWinner(getWinnerFromSemifinals(updatedMatches));
+      return updatedMatches;
+    });
+  }, []);
+
+  const canGenerateKnockout = useMemo(
+    () => Object.values(classifiedTeams).some((teamsByGroup) => teamsByGroup.length === 2),
+    [classifiedTeams]
+  );
 
   return (
     <Router>
       <NavBar />
-      <div className="container">
-        <h1>Torneo de Fútbol FC 25</h1>
+      <main className="container">
+        <section className="hero-banner">
+          <img src={logo} alt="Logo del torneo" className="hero-banner__logo" />
+          <div className="hero-banner__content">
+            <h1>Torneo de Fútbol FC 26</h1>
+            <p>Gestiona grupos, cruces y campeón con una experiencia profesional.</p>
+            <div className="hero-banner__actions">
+              <button type="button" className="btn btn--danger" onClick={() => setIsResetModalOpen(true)}>
+                Reiniciar torneo
+              </button>
+            </div>
+            <div className="hero-banner__stats">
+              <span><FaLayerGroup /> {groups.length} grupos</span>
+              <span><FaProjectDiagram /> {knockoutMatches.length} cruces</span>
+              <span><FaTrophy /> {winner ? winner.name : 'Sin campeón'}</span>
+            </div>
+          </div>
+        </section>
+
         <Routes>
           <Route path="/" element={
             <>
-              <GroupForm onAddGroup={addGroup} />
-              {groupNames.length > 0 && <TeamForm groupNames={groupNames} onAddTeam={addTeam} />}
-              <MatchForm onAddMatch={addMatch} />
-              {groups.map((group) => (
-                <GroupTable key={group.name} group={group} />
-              ))}
-              <ClassifiedTeams classifiedTeams={classifiedTeams} />
-              <button onClick={createKnockoutMatches}>Generar Eliminatorias</button>
+              <SectionCard title="Configuración" icon={<FaLayerGroup />} description="Crea grupos y registra equipos de forma ordenada.">
+                <GroupForm onAddGroup={addGroup} />
+                {groupNames.length > 0 && <TeamForm groupNames={groupNames} onAddTeam={addTeam} />}
+              </SectionCard>
+
+              <SectionCard title="Partidos de grupos" icon={<FaProjectDiagram />} description="Carga resultados para actualizar automáticamente la tabla.">
+                <MatchForm onAddMatch={addMatch} groups={groups} />
+                {groups.map((group) => (
+                  <GroupTable key={group.name} group={group} />
+                ))}
+              </SectionCard>
+
+              <SectionCard
+                title="Clasificados"
+                icon={<FaTrophy />}
+                description="Se calculan por puntos y diferencia de gol."
+                actions={(
+                  <button
+                    type="button"
+                    className="btn btn--primary"
+                    onClick={createKnockoutPhase}
+                    disabled={!canGenerateKnockout}
+                  >
+                    Generar eliminatorias
+                  </button>
+                )}
+              >
+                <ClassifiedTeams classifiedTeams={classifiedTeams} />
+              </SectionCard>
+
               <KnockoutStage knockoutMatches={knockoutMatches} onAddResult={addKnockoutResult} />
               <Semifinal semifinalMatches={semifinalMatches} onAddResult={addSemifinalResult} />
             </>
           } />
-          <Route path="/KnockoutStage" element={<KnockoutStage knockoutMatches={knockoutMatches} onAddResult={addKnockoutResult} />} />
+          <Route path="/knockout" element={<KnockoutStage knockoutMatches={knockoutMatches} onAddResult={addKnockoutResult} />} />
           <Route path="/semifinal" element={<Semifinal semifinalMatches={semifinalMatches} onAddResult={addSemifinalResult} />} />
           <Route path="/winner" element={winner && <Winner winner={winner} />} />
         </Routes>
-      </div>
+
+        {isResetModalOpen && (
+          <div className="modal-overlay" role="presentation" onClick={() => setIsResetModalOpen(false)}>
+            <div
+              className="modal-card"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="reset-modal-title"
+              onClick={(event) => event.stopPropagation()}
+            >
+              <h2 id="reset-modal-title"><FaExclamationTriangle /> Reiniciar torneo</h2>
+              <p>Esta acción eliminará todos los datos guardados del torneo. ¿Deseas continuar?</p>
+              <div className="modal-actions">
+                <button type="button" className="btn btn--ghost" onClick={() => setIsResetModalOpen(false)}>
+                  Cancelar
+                </button>
+                <button type="button" className="btn btn--danger" onClick={resetTournament}>
+                  Sí, reiniciar
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
     </Router>
   );
 }

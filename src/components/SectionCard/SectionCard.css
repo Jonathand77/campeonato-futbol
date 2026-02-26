@@ -1,0 +1,43 @@
+.section-card {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow);
+  animation: fadeUp 0.6s ease-out;
+}
+
+.section-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.section-card__title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.28rem;
+}
+
+.section-card__icon {
+  color: var(--accent);
+}
+
+.section-card__description {
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+}
+
+.section-card__actions {
+  margin-top: 0.8rem;
+}
+
+.section-card__content {
+  margin-top: 0.9rem;
+  display: grid;
+  gap: 0.85rem;
+}

@@ -1,0 +1,4 @@
+.group-section {
+  display: grid;
+  gap: 0.9rem;
+}

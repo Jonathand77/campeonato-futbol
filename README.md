@@ -1,131 +1,127 @@
-# CAMPEONATO-FUTBOL
+# ⚽ CAMPEONATO-FUTBOL
 
-**Descripción del Proyecto:**
-Este proyecto consistió en crear esta página de Creación de torneos de futbol como proyecto de práctica de desarrollo web, donde se aplican técnicas avanzadas de HTML, CSS, JavaScript y React para crear una plataforma funcional y visualmente impresionante. El objetivo es demostrar habilidades en diseño web, desarrollo front-end y optimización de la experiencia del usuario.
+---
 
-**Tecnologías Utilizadas:**
-- **Lenguajes de programación:** HTML<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> CSS<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> JavaScript <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/>
-- **Herramientas y frameworks:** React <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg" alt="react" width="40" height="40"/>
+## 🛠️ Stack tecnológico y Arquitectura
 
-## Comenzando 🚀
+![React](https://img.shields.io/badge/React-18-61DAFB?logo=react)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=000)
+![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=fff)
+![CSS3](https://img.shields.io/badge/CSS3-1572B6?logo=css3&logoColor=fff)
+![Architecture](https://img.shields.io/badge/Architecture-Component--Based-blue)
+![Build](https://img.shields.io/badge/Build-Create%20React%20App-09D3AC)
+![Languages](https://img.shields.io/github/languages/count/Jonathand77/campeonato-futbol)
+![GitHub repo size](https://img.shields.io/github/repo-size/Jonathand77/campeonato-futbol)
+![GitHub contributors](https://img.shields.io/github/contributors/Jonathand77/campeonato-futbol)
+![GitHub last commit](https://img.shields.io/github/last-commit/Jonathand77/campeonato-futbol)
 
-_Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas._
+---
 
-Mira **Deployment** para conocer como desplegar el proyecto.
+## 👤 Autor
 
+| 👨‍💻 Nombre | 🐙 Usuario GitHub |
+|---|---|
+| **Jonathan Fernandez** | [Jonathand77](https://github.com/Jonathand77) |
 
-### Pre-requisitos 📋
+---
 
-_Que cosas necesitas para instalar el software y como instalarlas_
+## 1. 🔍 Descripción del Proyecto
 
-```
-- Asegúrate de tener Git instalado en tu sistema. Puedes descargarlo desde git-scm.com y seguir las instrucciones de instalación.
-- GitHub.
-- Un IDE como por ejemplo: VisualStudio Code.
-- Un navegador como por ejemplo: Chrome.
-```
+Este proyecto consistió en crear una página para la **creación y gestión de torneos de fútbol** como práctica de desarrollo web, donde se aplican técnicas avanzadas de **HTML, CSS, JavaScript y React** para construir una plataforma funcional y visualmente atractiva.
 
-### Instalación 🔧
+El objetivo es demostrar habilidades en:
+- Diseño web
+- Desarrollo frontend
+- Optimización de experiencia de usuario
 
-_Una serie de ejemplos paso a paso que te dice lo que debes ejecutar para tener un entorno de desarrollo ejecutandose_
+---
 
-_Clonar repositorio_
+## 2. ⚙️ Tecnologías Utilizadas
 
-```
+- **Lenguajes de programación:**
+  - HTML
+  - CSS
+  - JavaScript
+- **Herramientas y frameworks:**
+  - React
+
+---
+
+## 3. 🚀 Comenzando
+
+Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
+
+---
+
+## 4. 📋 Pre-requisitos
+
+Asegúrate de tener instalado en tu sistema:
+
+- Git (https://git-scm.com)
+- GitHub (cuenta para clonar/gestionar repositorios)
+- Visual Studio Code (u otro IDE)
+- Un navegador web (por ejemplo, Chrome)
+
+---
+
+## 5. 🔧 Instalación
+
+### 5.1 Clonar repositorio
+
+```bash
 git clone https://github.com/usuario/nombre-del-repositorio.git
 ```
 
-_Verifica la clonación_
+### 5.2 Verificar la clonación
 
-```
+```bash
 cd nombre-del-repositorio
 ```
 
-# Getting Started with Create React App
+---
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 6. 🧪 Scripts disponibles (Create React App)
 
-## Available Scripts
-
-In the project directory, you can run:
+En la carpeta del proyecto puedes ejecutar:
 
 ### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Ejecuta la app en modo desarrollo.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
 
 ### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Lanza el runner de pruebas en modo interactivo.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Compila la app para producción en la carpeta `build`.
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-
-## Autores ✒️
-
-* **Jonathan Fernandez** - [Jonathand77](https://github.com/Jonathand77)
-
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-
-
-## Expresiones de Gratitud 🎁
-
-* Comenta a otros sobre este proyecto 📢
-* Dar las gracias públicamente 🤓.
-
-
+**Nota:** operación irreversible. Expone configuración interna de CRA.
 
 ---
-⌨️ por [Jonathand77](https://github.com/Jonathand77) 😊
+
+## 7. 📚 Referencias útiles
+
+- [Create React App - Documentación](https://github.com/facebook/create-react-app)
+- [CRA - Getting Started](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React - Documentación oficial](https://reactjs.org/)
+
+Secciones avanzadas de CRA:
+- [Code Splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- [Analyzing Bundle Size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- [PWA](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- [Advanced Configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [Deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- [Troubleshooting build](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+---
+
+## 9. 🎁 Expresiones de Gratitud
+
+- Comenta a otros sobre este proyecto 📢
+- Dar las gracias públicamente 🤓
+
+---
